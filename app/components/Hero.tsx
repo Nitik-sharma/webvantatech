@@ -1,5 +1,5 @@
 "use client";
-
+import type { ComponentType } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -189,7 +189,7 @@ function IconStar({ className }: { className?: string }) {
 type FloatCard = {
   title: string;
   description: string;
-  icon: (props: { className?: string }) => JSX.Element;
+  icon: ComponentType<{ className?: string }>;
   accent: string;
   ink: string;
   position: string;
