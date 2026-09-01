@@ -3,12 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Manrope } from "next/font/google";
 import logo from "@/public/images/logoimages.png";
-
-
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -17,7 +15,7 @@ const manrope = Manrope({
 });
 
 /* -------------------------------------------------------------------------- */
-/*  Data                                                                      */
+/* Data                                                                       */
 /* -------------------------------------------------------------------------- */
 
 type NavItem = {
@@ -29,7 +27,7 @@ type Service = {
   title: string;
   description: string;
   href: string;
-  icon: (props: { className?: string }) => JSX.Element;
+  icon: ComponentType<{ className?: string }>;
 };
 
 const NAV_ITEMS: NavItem[] = [
@@ -41,7 +39,7 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/*  Icons (hand-rolled, no icon library)                                      */
+/* Icons                                                                      */
 /* -------------------------------------------------------------------------- */
 
 function IconSEO({ className }: { className?: string }) {
@@ -177,6 +175,10 @@ function IconAutomation({ className }: { className?: string }) {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/* Services                                                                   */
+/* -------------------------------------------------------------------------- */
+
 const SERVICES: Service[] = [
   {
     title: "SEO",
@@ -217,8 +219,7 @@ const SERVICES: Service[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
-/*  Decorative circuit trace — a quiet nod to the brand mark, used once as    */
-/*  a low-opacity backdrop inside the mega-menu's highlight panel.           */
+/* Decorative circuit trace                                                   */
 /* -------------------------------------------------------------------------- */
 
 function CircuitTrace() {
@@ -241,7 +242,7 @@ function CircuitTrace() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Navbar                                                                    */
+/* Navbar                                                                     */
 /* -------------------------------------------------------------------------- */
 
 export default function Navbar() {
@@ -253,12 +254,16 @@ export default function Navbar() {
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   const servicesRef = useRef<HTMLDivElement>(null);
+
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
+
     onScroll();
+
     window.addEventListener("scroll", onScroll, { passive: true });
+
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
@@ -277,12 +282,15 @@ export default function Navbar() {
         setIsServicesOpen(false);
       }
     };
+
     document.addEventListener("mousedown", onClick);
+
     return () => document.removeEventListener("mousedown", onClick);
   }, []);
 
   useEffect(() => {
     document.body.style.overflow = isMobileOpen ? "hidden" : "";
+
     return () => {
       document.body.style.overflow = "";
     };
@@ -296,7 +304,10 @@ export default function Navbar() {
   const isServicesActive = pathname.startsWith("/services");
 
   const openServices = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
+    if (closeTimer.current) {
+      clearTimeout(closeTimer.current);
+    }
+
     setIsServicesOpen(true);
   };
 
@@ -306,7 +317,7 @@ export default function Navbar() {
 
   return (
     <header className={`${manrope.className} fixed inset-x-0 top-0 z-50`}>
-      {/* Signature hairline — a quiet circuit-trace gradient that always caps the viewport */}
+      {/* Signature hairline */}
       <div className="h-[2.5px] w-full bg-gradient-to-r from-[#021759] via-[#017EF3] to-[#02B5F6]" />
 
       <div
@@ -322,7 +333,7 @@ export default function Navbar() {
             isScrolled ? "h-[68px]" : "h-[84px]"
           }`}
         >
-          {/* Logo — mark only, no wordmark */}
+          {/* Logo */}
           <Link
             href="/"
             aria-label="WebVanta Technologies — home"
@@ -331,7 +342,11 @@ export default function Navbar() {
             <motion.span
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.96 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 25,
+              }}
               className="flex items-center justify-center rounded-xl"
             >
               <Image
@@ -351,7 +366,7 @@ export default function Navbar() {
               <NavLink href="/" label="Home" active={isActive("/")} />
             </li>
 
-            {/* Services — dropdown */}
+            {/* Services */}
             <li
               ref={servicesRef}
               className="relative"
@@ -364,7 +379,10 @@ export default function Navbar() {
                 aria-expanded={isServicesOpen}
                 onClick={() => setIsServicesOpen((v) => !v)}
                 onKeyDown={(e) => {
-                  if (e.key === "Escape") setIsServicesOpen(false);
+                  if (e.key === "Escape") {
+                    setIsServicesOpen(false);
+                  }
+
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
                     setIsServicesOpen(true);
@@ -380,7 +398,9 @@ export default function Navbar() {
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
-                  className={`h-3.5 w-3.5 transition-transform duration-200 ${isServicesOpen ? "rotate-180" : ""}`}
+                  className={`h-3.5 w-3.5 transition-transform duration-200 ${
+                    isServicesOpen ? "rotate-180" : ""
+                  }`}
                 >
                   <path
                     d="m6 9 6 6 6-6"
@@ -394,7 +414,11 @@ export default function Navbar() {
                   <motion.span
                     layoutId="nav-underline"
                     className="absolute -bottom-[3px] left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-[#017EF3] to-[#02B5F6]"
-                    transition={{ type: "spring", stiffness: 500, damping: 40 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 500,
+                      damping: 40,
+                    }}
                   />
                 )}
               </button>
@@ -407,7 +431,10 @@ export default function Navbar() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    transition={{
+                      duration: 0.18,
+                      ease: "easeOut",
+                    }}
                     className="absolute left-1/2 top-full z-50 mt-4 w-[680px] max-w-[90vw] -translate-x-1/2 overflow-hidden rounded-2xl border border-slate-900/[0.06] bg-white shadow-[0_30px_70px_-20px_rgba(2,23,89,0.3)]"
                   >
                     <div className="grid grid-cols-[1fr_240px]">
@@ -415,6 +442,7 @@ export default function Navbar() {
                       <div className="p-3">
                         {SERVICES.map((service) => {
                           const Icon = service.icon;
+
                           return (
                             <Link
                               key={service.href}
@@ -423,13 +451,16 @@ export default function Navbar() {
                               className="group/item relative flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-[#F7FAFF]"
                             >
                               <span className="absolute left-0 top-1/2 h-0 w-[3px] -translate-y-1/2 rounded-full bg-gradient-to-b from-[#017EF3] to-[#02B5F6] transition-all duration-200 group-hover/item:h-[70%]" />
+
                               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[#F7FAFF] text-[#024ABF] transition-colors group-hover/item:bg-[#017EF3] group-hover/item:text-white">
                                 <Icon className="h-[18px] w-[18px]" />
                               </span>
+
                               <span>
                                 <span className="block text-[14px] font-semibold tracking-[-0.01em] text-[#021759]">
                                   {service.title}
                                 </span>
+
                                 <span className="mt-0.5 block text-[12.5px] leading-snug text-slate-500">
                                   {service.description}
                                 </span>
@@ -442,15 +473,18 @@ export default function Navbar() {
                       {/* Highlight sidebar */}
                       <div className="relative flex flex-col justify-between overflow-hidden bg-[#021759] p-6">
                         <CircuitTrace />
+
                         <div className="relative">
                           <span className="block text-[15px] font-bold leading-snug text-white">
                             Not sure where to start?
                           </span>
+
                           <span className="mt-2 block text-[13px] leading-relaxed text-white/65">
                             Tell us your goal and we&apos;ll map the right
                             services to it.
                           </span>
                         </div>
+
                         <Link
                           href="/services"
                           role="menuitem"
@@ -489,7 +523,11 @@ export default function Navbar() {
                 <motion.span
                   aria-hidden="true"
                   variants={{ hover: { x: 3 } }}
-                  transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 400,
+                    damping: 20,
+                  }}
                 >
                   →
                 </motion.span>
@@ -512,11 +550,13 @@ export default function Navbar() {
                   isMobileOpen ? "translate-y-[6px] rotate-45" : ""
                 }`}
               />
+
               <span
                 className={`absolute left-0 top-1/2 h-[1.6px] w-5 -translate-y-1/2 bg-current transition-opacity duration-200 ${
                   isMobileOpen ? "opacity-0" : "opacity-100"
                 }`}
               />
+
               <span
                 className={`absolute bottom-0 left-0 h-[1.6px] w-5 bg-current transition-transform duration-300 ${
                   isMobileOpen ? "-translate-y-[6px] -rotate-45" : ""
@@ -535,7 +575,10 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+            transition={{
+              duration: 0.25,
+              ease: "easeInOut",
+            }}
             className="overflow-hidden border-t border-slate-900/[0.06] bg-white lg:hidden"
           >
             <div className="max-h-[calc(100vh-4.5rem)] overflow-y-auto px-6 py-4">
@@ -574,15 +617,28 @@ export default function Navbar() {
                     {isMobileServicesOpen && (
                       <motion.div
                         id="mobile-services"
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2, ease: "easeInOut" }}
+                        initial={{
+                          opacity: 0,
+                          height: 0,
+                        }}
+                        animate={{
+                          opacity: 1,
+                          height: "auto",
+                        }}
+                        exit={{
+                          opacity: 0,
+                          height: 0,
+                        }}
+                        transition={{
+                          duration: 0.2,
+                          ease: "easeInOut",
+                        }}
                         className="overflow-hidden"
                       >
                         <div className="flex flex-col gap-1 pb-3 pl-1">
                           {SERVICES.map((service) => {
                             const Icon = service.icon;
+
                             return (
                               <Link
                                 key={service.href}
@@ -592,10 +648,12 @@ export default function Navbar() {
                                 <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#F7FAFF] text-[#024ABF]">
                                   <Icon className="h-4 w-4" />
                                 </span>
+
                                 <span>
                                   <span className="block text-[13.5px] font-semibold text-[#021759]">
                                     {service.title}
                                   </span>
+
                                   <span className="mt-0.5 block text-[12px] leading-snug text-slate-500">
                                     {service.description}
                                   </span>
@@ -604,12 +662,15 @@ export default function Navbar() {
                             );
                           })}
                         </div>
+
                         <div className="relative mb-3 overflow-hidden rounded-xl bg-[#021759] px-4 py-3">
                           <CircuitTrace />
+
                           <div className="relative flex items-center justify-between">
                             <span className="text-[13px] font-medium text-white/90">
                               Not sure where to start?
                             </span>
+
                             <Link
                               href="/services"
                               className="text-[13px] font-semibold text-[#02B5F6]"
@@ -648,7 +709,7 @@ export default function Navbar() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Small subcomponents                                                       */
+/* Navigation link                                                            */
 /* -------------------------------------------------------------------------- */
 
 function NavLink({
@@ -668,16 +729,25 @@ function NavLink({
       }`}
     >
       {label}
+
       {active && (
         <motion.span
           layoutId="nav-underline"
           className="absolute -bottom-[3px] left-4 right-4 h-[2px] rounded-full bg-gradient-to-r from-[#017EF3] to-[#02B5F6]"
-          transition={{ type: "spring", stiffness: 500, damping: 40 }}
+          transition={{
+            type: "spring",
+            stiffness: 500,
+            damping: 40,
+          }}
         />
       )}
     </Link>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* Mobile navigation link                                                     */
+/* -------------------------------------------------------------------------- */
 
 function MobileLink({
   href,
@@ -692,7 +762,9 @@ function MobileLink({
     <li className="border-b border-slate-900/[0.05]">
       <Link
         href={href}
-        className={`block py-3 text-[15px] font-medium ${active ? "text-[#017EF3]" : "text-[#021759]"}`}
+        className={`block py-3 text-[15px] font-medium ${
+          active ? "text-[#017EF3]" : "text-[#021759]"
+        }`}
       >
         {label}
       </Link>
