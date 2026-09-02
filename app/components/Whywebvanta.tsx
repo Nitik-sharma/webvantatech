@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import type { ReactElement } from "react";
 
 /* -------------------------------------------------------------------------- */
 /*  Icons (hand-rolled, no icon library — consistent with the rest of site)  */
@@ -105,7 +106,7 @@ type Feature = {
   number: string;
   title: string;
   description: string;
-  icon: (props: { className?: string }) => JSX.Element;
+  icon: (props: { className?: string }) => ReactElement;
 };
 
 const FEATURES: Feature[] = [
@@ -351,7 +352,6 @@ export default function WhyWebVanta() {
 
                   <div className="min-w-0">
                     <div className="flex items-center gap-3">
-                     
                       <h3 className="text-[17px] font-bold tracking-[-0.01em] text-[#021759]">
                         {feature.title}
                       </h3>

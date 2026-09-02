@@ -14,10 +14,6 @@ const manrope = Manrope({
   variable: "--font-manrope",
 });
 
-/* -------------------------------------------------------------------------- */
-/* Data                                                                       */
-/* -------------------------------------------------------------------------- */
-
 type NavItem = {
   label: string;
   href: string;
@@ -38,13 +34,14 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Insights", href: "/insights" },
 ];
 
-/* -------------------------------------------------------------------------- */
-/* Icons                                                                      */
-/* -------------------------------------------------------------------------- */
-
 function IconSEO({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
       <circle
         cx="10.5"
         cy="10.5"
@@ -71,7 +68,12 @@ function IconSEO({ className }: { className?: string }) {
 
 function IconWebDev({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
       <path
         d="M8.5 8 5 12l3.5 4"
         stroke="currentColor"
@@ -98,7 +100,12 @@ function IconWebDev({ className }: { className?: string }) {
 
 function IconWebApp({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
       <rect
         x="4"
         y="5.5"
@@ -117,7 +124,12 @@ function IconWebApp({ className }: { className?: string }) {
 
 function IconMarketing({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
       <path
         d="M4 10.5v3a1 1 0 0 0 1 1h1.6L11 18v-11l-4.4 3.5H5a1 1 0 0 0-1 1Z"
         stroke="currentColor"
@@ -142,7 +154,12 @@ function IconMarketing({ className }: { className?: string }) {
 
 function IconGrowth({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
       <path
         d="M4 16.5 9.5 11l3.3 3.3L20 7"
         stroke="currentColor"
@@ -163,7 +180,12 @@ function IconGrowth({ className }: { className?: string }) {
 
 function IconAutomation({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" fill="none" className={className}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      className={className}
+      aria-hidden="true"
+    >
       <circle cx="12" cy="12" r="2.6" stroke="currentColor" strokeWidth="1.6" />
       <path
         d="M12 4.5v2M12 17.5v2M19.5 12h-2M6.5 12h-2M17.5 6.5l-1.4 1.4M7.9 16.1l-1.4 1.4M17.5 17.5l-1.4-1.4M7.9 7.9 6.5 6.5"
@@ -174,10 +196,6 @@ function IconAutomation({ className }: { className?: string }) {
     </svg>
   );
 }
-
-/* -------------------------------------------------------------------------- */
-/* Services                                                                   */
-/* -------------------------------------------------------------------------- */
 
 const SERVICES: Service[] = [
   {
@@ -218,16 +236,13 @@ const SERVICES: Service[] = [
   },
 ];
 
-/* -------------------------------------------------------------------------- */
-/* Decorative circuit trace                                                   */
-/* -------------------------------------------------------------------------- */
-
 function CircuitTrace() {
   return (
     <svg
       viewBox="0 0 220 220"
       fill="none"
       className="absolute -right-6 -top-6 h-44 w-44 opacity-[0.14]"
+      aria-hidden="true"
     >
       <path d="M10 40h60v40h80v50h60" stroke="#02B5F6" strokeWidth="1.4" />
       <path d="M30 10v50h50v70h90" stroke="#017EF3" strokeWidth="1.4" />
@@ -241,10 +256,6 @@ function CircuitTrace() {
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/* Navbar                                                                     */
-/* -------------------------------------------------------------------------- */
-
 export default function Navbar() {
   const pathname = usePathname();
 
@@ -253,18 +264,18 @@ export default function Navbar() {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
-  const servicesRef = useRef<HTMLDivElement>(null);
-
+  const servicesRef = useRef<HTMLLIElement | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 12);
 
     onScroll();
-
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -275,9 +286,12 @@ export default function Navbar() {
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
+      const target = e.target;
+
       if (
         servicesRef.current &&
-        !servicesRef.current.contains(e.target as Node)
+        target instanceof Node &&
+        !servicesRef.current.contains(target)
       ) {
         setIsServicesOpen(false);
       }
@@ -285,7 +299,9 @@ export default function Navbar() {
 
     document.addEventListener("mousedown", onClick);
 
-    return () => document.removeEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+    };
   }, []);
 
   useEffect(() => {
@@ -296,6 +312,14 @@ export default function Navbar() {
     };
   }, [isMobileOpen]);
 
+  useEffect(() => {
+    return () => {
+      if (closeTimer.current !== null) {
+        clearTimeout(closeTimer.current);
+      }
+    };
+  }, []);
+
   const isActive = (href: string) =>
     href === "/"
       ? pathname === "/"
@@ -304,20 +328,32 @@ export default function Navbar() {
   const isServicesActive = pathname.startsWith("/services");
 
   const openServices = () => {
-    if (closeTimer.current) {
+    if (closeTimer.current !== null) {
       clearTimeout(closeTimer.current);
+      closeTimer.current = null;
     }
 
     setIsServicesOpen(true);
   };
 
   const scheduleCloseServices = () => {
-    closeTimer.current = setTimeout(() => setIsServicesOpen(false), 120);
+    if (closeTimer.current !== null) {
+      clearTimeout(closeTimer.current);
+    }
+
+    closeTimer.current = setTimeout(() => {
+      setIsServicesOpen(false);
+      closeTimer.current = null;
+    }, 120);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileOpen(false);
+    setIsMobileServicesOpen(false);
   };
 
   return (
     <header className={`${manrope.className} fixed inset-x-0 top-0 z-50`}>
-      {/* Signature hairline */}
       <div className="h-[2.5px] w-full bg-gradient-to-r from-[#021759] via-[#017EF3] to-[#02B5F6]" />
 
       <div
@@ -333,11 +369,11 @@ export default function Navbar() {
             isScrolled ? "h-[68px]" : "h-[84px]"
           }`}
         >
-          {/* Logo */}
           <Link
             href="/"
             aria-label="WebVanta Technologies — home"
             className="shrink-0"
+            onClick={closeMobileMenu}
           >
             <motion.span
               whileHover={{ scale: 1.05 }}
@@ -360,13 +396,11 @@ export default function Navbar() {
             </motion.span>
           </Link>
 
-          {/* Desktop navigation */}
           <ul className="hidden items-center gap-1 lg:flex">
             <li>
               <NavLink href="/" label="Home" active={isActive("/")} />
             </li>
 
-            {/* Services */}
             <li
               ref={servicesRef}
               className="relative"
@@ -377,7 +411,13 @@ export default function Navbar() {
                 type="button"
                 aria-haspopup="true"
                 aria-expanded={isServicesOpen}
-                onClick={() => setIsServicesOpen((v) => !v)}
+                onClick={() => {
+                  if (closeTimer.current !== null) {
+                    clearTimeout(closeTimer.current);
+                    closeTimer.current = null;
+                  }
+                  setIsServicesOpen((value) => !value);
+                }}
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {
                     setIsServicesOpen(false);
@@ -398,6 +438,7 @@ export default function Navbar() {
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
+                  aria-hidden="true"
                   className={`h-3.5 w-3.5 transition-transform duration-200 ${
                     isServicesOpen ? "rotate-180" : ""
                   }`}
@@ -436,9 +477,10 @@ export default function Navbar() {
                       ease: "easeOut",
                     }}
                     className="absolute left-1/2 top-full z-50 mt-4 w-[680px] max-w-[90vw] -translate-x-1/2 overflow-hidden rounded-2xl border border-slate-900/[0.06] bg-white shadow-[0_30px_70px_-20px_rgba(2,23,89,0.3)]"
+                    onMouseEnter={openServices}
+                    onMouseLeave={scheduleCloseServices}
                   >
                     <div className="grid grid-cols-[1fr_240px]">
-                      {/* Service list */}
                       <div className="p-3">
                         {SERVICES.map((service) => {
                           const Icon = service.icon;
@@ -470,7 +512,6 @@ export default function Navbar() {
                         })}
                       </div>
 
-                      {/* Highlight sidebar */}
                       <div className="relative flex flex-col justify-between overflow-hidden bg-[#021759] p-6">
                         <CircuitTrace />
 
@@ -511,7 +552,6 @@ export default function Navbar() {
             ))}
           </ul>
 
-          {/* Desktop CTA */}
           <div className="hidden lg:block">
             <Link href="/get-started">
               <motion.span
@@ -535,10 +575,9 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile hamburger */}
           <button
             type="button"
-            onClick={() => setIsMobileOpen((v) => !v)}
+            onClick={() => setIsMobileOpen((value) => !value)}
             aria-expanded={isMobileOpen}
             aria-controls="mobile-menu"
             aria-label={isMobileOpen ? "Close menu" : "Open menu"}
@@ -567,7 +606,6 @@ export default function Navbar() {
         </nav>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
@@ -583,12 +621,17 @@ export default function Navbar() {
           >
             <div className="max-h-[calc(100vh-4.5rem)] overflow-y-auto px-6 py-4">
               <ul className="flex flex-col">
-                <MobileLink href="/" label="Home" active={isActive("/")} />
+                <MobileLink
+                  href="/"
+                  label="Home"
+                  active={isActive("/")}
+                  onClick={closeMobileMenu}
+                />
 
                 <li className="border-b border-slate-900/[0.05] py-1">
                   <button
                     type="button"
-                    onClick={() => setIsMobileServicesOpen((v) => !v)}
+                    onClick={() => setIsMobileServicesOpen((value) => !value)}
                     aria-expanded={isMobileServicesOpen}
                     aria-controls="mobile-services"
                     className={`flex w-full items-center justify-between py-3 text-[15px] font-medium ${
@@ -599,6 +642,7 @@ export default function Navbar() {
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
+                      aria-hidden="true"
                       className={`h-4 w-4 transition-transform duration-200 ${
                         isMobileServicesOpen ? "rotate-180" : ""
                       }`}
@@ -643,6 +687,7 @@ export default function Navbar() {
                               <Link
                                 key={service.href}
                                 href={service.href}
+                                onClick={closeMobileMenu}
                                 className="flex items-start gap-3 rounded-xl p-2.5 hover:bg-[#F7FAFF]"
                               >
                                 <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#F7FAFF] text-[#024ABF]">
@@ -673,6 +718,7 @@ export default function Navbar() {
 
                             <Link
                               href="/services"
+                              onClick={closeMobileMenu}
                               className="text-[13px] font-semibold text-[#02B5F6]"
                             >
                               View all →
@@ -690,11 +736,16 @@ export default function Navbar() {
                     href={item.href}
                     label={item.label}
                     active={isActive(item.href)}
+                    onClick={closeMobileMenu}
                   />
                 ))}
               </ul>
 
-              <Link href="/get-started" className="mt-4 block">
+              <Link
+                href="/get-started"
+                className="mt-4 block"
+                onClick={closeMobileMenu}
+              >
                 <span className="flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-[#017EF3] to-[#024ABF] px-5 py-3 text-[14.5px] font-semibold text-white shadow-[0_14px_30px_-14px_rgba(1,126,243,0.7)]">
                   Get Started
                   <span aria-hidden="true">→</span>
@@ -707,10 +758,6 @@ export default function Navbar() {
     </header>
   );
 }
-
-/* -------------------------------------------------------------------------- */
-/* Navigation link                                                            */
-/* -------------------------------------------------------------------------- */
 
 function NavLink({
   href,
@@ -745,23 +792,22 @@ function NavLink({
   );
 }
 
-/* -------------------------------------------------------------------------- */
-/* Mobile navigation link                                                     */
-/* -------------------------------------------------------------------------- */
-
 function MobileLink({
   href,
   label,
   active,
+  onClick,
 }: {
   href: string;
   label: string;
   active: boolean;
+  onClick?: () => void;
 }) {
   return (
     <li className="border-b border-slate-900/[0.05]">
       <Link
         href={href}
+        onClick={onClick}
         className={`block py-3 text-[15px] font-medium ${
           active ? "text-[#017EF3]" : "text-[#021759]"
         }`}
