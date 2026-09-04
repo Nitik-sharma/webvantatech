@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { Manrope } from "next/font/google";
 
 import HeroImage from "../../public/images/HeroImage.png";
-import logo from "@/public/images/logoimages.png";
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -101,7 +100,13 @@ function AutomationIcon({ className = "" }: { className?: string }) {
       className={className}
       aria-hidden="true"
     >
-      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.6" />
+      <circle
+        cx="12"
+        cy="12"
+        r="3"
+        stroke="currentColor"
+        strokeWidth="1.6"
+      />
 
       <path
         d="M12 4v2M12 18v2M4 12h2M18 12h2M6.4 6.4l1.4 1.4M16.2 16.2l1.4 1.4M17.6 6.4l-1.4 1.4M7.8 16.2l-1.4 1.4"
@@ -131,7 +136,13 @@ function ArrowIcon() {
    FEATURE
    ========================================================================== */
 
-function Feature({ icon, title }: { icon: React.ReactNode; title: string }) {
+function Feature({
+  icon,
+  title,
+}: {
+  icon: React.ReactNode;
+  title: string;
+}) {
   return (
     <div className="flex items-center gap-2.5">
       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white/90 text-[#017EF3] shadow-[0_8px_20px_-12px_rgba(2,23,89,0.45)] ring-1 ring-[#017EF3]/10 backdrop-blur-md">
@@ -205,7 +216,8 @@ export default function Hero() {
       className={`${manrope.className} relative isolate overflow-hidden bg-white pt-28 sm:pt-32 lg:pt-32`}
     >
       {/* ================================================================== */}
-      {/* HERO IMAGE BACKGROUND                                                */}
+      {/* HERO IMAGE BACKGROUND                                               */}
+      {/* SAME IMAGE ON ALL SCREEN SIZES                                      */}
       {/* ================================================================== */}
 
       <div aria-hidden="true" className="absolute inset-0 -z-30">
@@ -220,11 +232,10 @@ export default function Hero() {
       </div>
 
       {/* ================================================================== */}
-      {/* IMAGE OVERLAY                                                        */}
+      {/* IMAGE OVERLAY                                                       */}
       {/* ================================================================== */}
 
       <div aria-hidden="true" className="absolute inset-0 -z-20">
-        {/* LEFT CONTENT READABILITY */}
         <div
           className="
             absolute inset-0
@@ -238,24 +249,39 @@ export default function Hero() {
           "
         />
 
-        {/* TOP SOFT FADE */}
         <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-white/75 to-transparent" />
 
-        {/* BOTTOM SOFT FADE */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/85 to-transparent" />
       </div>
 
       {/* ================================================================== */}
-      {/* MAIN CONTAINER                                                       */}
+      {/* MAIN CONTAINER                                                      */}
       {/* ================================================================== */}
 
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12 xl:px-16">
-        <div className="relative min-h-[720px] lg:min-h-[735px]">
+        <div className="relative min-h-[650px] sm:min-h-[680px] lg:min-h-[735px]">
+
           {/* ================================================================ */}
-          {/* LEFT CONTENT                                                      */}
+          {/* LEFT CONTENT                                                     */}
           {/* ================================================================ */}
 
-          <div className="relative z-40 flex max-w-[700px] flex-col justify-center pt-8 lg:min-h-[680px] lg:pt-0">
+          <div
+            className="
+              relative
+              z-40
+              flex
+              w-full
+              max-w-[700px]
+              flex-col
+              justify-center
+              pt-8
+              pb-10
+              sm:pb-12
+              lg:min-h-[680px]
+              lg:pt-0
+              lg:pb-0
+            "
+          >
             {/* EYEBROW */}
 
             <motion.div
@@ -267,10 +293,11 @@ export default function Hero() {
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#02B5F6] opacity-60" />
+
                   <span className="relative h-2 w-2 rounded-full bg-[#017EF3]" />
                 </span>
 
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-[#024ABF]">
+                <span className="text-[9px] font-extrabold uppercase tracking-[0.12em] text-[#024ABF] sm:text-[10px] sm:tracking-[0.16em]">
                   Digital Solutions for Modern Businesses
                 </span>
               </div>
@@ -284,13 +311,14 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.08 }}
               className="
-                mt-7
+                mt-6
                 max-w-[680px]
-                text-[45px]
+                text-[39px]
                 font-extrabold
-                leading-[1.04]
+                leading-[1.06]
                 tracking-[-0.055em]
                 text-[#021759]
+                sm:mt-7
                 sm:text-[56px]
                 lg:text-[61px]
                 xl:text-[67px]
@@ -312,11 +340,20 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.18 }}
-              className="mt-7 max-w-[625px] text-[15px] font-semibold leading-[1.7] text-[#021759]/85 sm:text-[16px]"
+              className="
+                mt-6
+                max-w-[625px]
+                text-[14px]
+                font-semibold
+                leading-[1.7]
+                text-[#021759]/85
+                sm:mt-7
+                sm:text-[16px]
+              "
             >
-              Web Development, AI Solutions, SEO and Digital Marketing designed
-              to help your business get discovered, connect with customers and
-              scale with confidence.
+              Web Development, AI Solutions, SEO and Digital Marketing
+              designed to help your business get discovered, connect with
+              customers and scale with confidence.
             </motion.p>
 
             {/* DESCRIPTION */}
@@ -325,7 +362,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.24 }}
-              className="mt-3.5 max-w-[610px] text-[13.5px] leading-[1.8] text-slate-600 sm:text-[14px]"
+              className="
+                mt-3
+                max-w-[610px]
+                text-[13px]
+                leading-[1.75]
+                text-slate-600
+                sm:mt-3.5
+                sm:text-[14px]
+              "
             >
               WebVanta Technologies creates high-performance websites, custom
               web applications, mobile solutions, AI-powered workflows and
@@ -339,13 +384,31 @@ export default function Hero() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.3 }}
-              className="mt-8 flex flex-col gap-3 sm:flex-row"
+              className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row"
             >
               <Link href="/get-started" className="group">
                 <motion.span
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#017EF3] px-7 py-3.5 text-[13px] font-extrabold text-white shadow-[0_18px_40px_-15px_rgba(1,126,243,0.7)] transition-all duration-300 hover:bg-[#024ABF] sm:w-auto"
+                  className="
+                    inline-flex
+                    w-full
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-full
+                    bg-[#017EF3]
+                    px-7
+                    py-3.5
+                    text-[13px]
+                    font-extrabold
+                    text-white
+                    shadow-[0_18px_40px_-15px_rgba(1,126,243,0.7)]
+                    transition-all
+                    duration-300
+                    hover:bg-[#024ABF]
+                    sm:w-auto
+                  "
                 >
                   Start Your Project
                   <ArrowIcon />
@@ -356,7 +419,28 @@ export default function Hero() {
                 <motion.span
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#017EF3] bg-white/80 px-7 py-3.5 text-[13px] font-extrabold text-[#017EF3] backdrop-blur-md transition-all duration-300 hover:bg-[#017EF3] hover:text-white sm:w-auto"
+                  className="
+                    inline-flex
+                    w-full
+                    items-center
+                    justify-center
+                    gap-2
+                    rounded-full
+                    border
+                    border-[#017EF3]
+                    bg-white/80
+                    px-7
+                    py-3.5
+                    text-[13px]
+                    font-extrabold
+                    text-[#017EF3]
+                    backdrop-blur-md
+                    transition-all
+                    duration-300
+                    hover:bg-[#017EF3]
+                    hover:text-white
+                    sm:w-auto
+                  "
                 >
                   Explore Our Services
                   <ArrowIcon />
@@ -370,7 +454,15 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.4 }}
-              className="mt-10 flex flex-wrap gap-x-7 gap-y-5"
+              className="
+                mt-9
+                flex
+                flex-wrap
+                gap-x-6
+                gap-y-5
+                sm:mt-10
+                sm:gap-x-7
+              "
             >
               <Feature
                 icon={<WebIcon className="h-5 w-5" />}
@@ -399,18 +491,19 @@ export default function Hero() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.7, delay: 0.48 }}
-              className="mt-8 flex items-center gap-3"
+              className="mt-7 flex items-center gap-3 sm:mt-8"
             >
               <span className="h-[2px] w-8 bg-[#017EF3]" />
 
-              <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#024ABF]/70">
+              <span className="text-[8px] font-bold uppercase tracking-[0.20em] text-[#024ABF]/70 sm:text-[9px] sm:tracking-[0.25em]">
                 Technology × Strategy × Growth
               </span>
             </motion.div>
           </div>
 
           {/* ================================================================ */}
-          {/* RIGHT IMAGE / EARTH AREA                                          */}
+          {/* RIGHT IMAGE / EARTH AREA                                         */}
+          {/* DESKTOP ONLY                                                     */}
           {/* ================================================================ */}
 
           <div
@@ -424,9 +517,7 @@ export default function Hero() {
               lg:block
             "
           >
-            {/* ============================================================ */}
-            {/* AI CARD                                                        */}
-            {/* ============================================================ */}
+            {/* AI CARD */}
 
             <GlassCard
               className="right-[27%] top-[19%]"
@@ -435,9 +526,7 @@ export default function Hero() {
               subtitle="Digital Solutions"
             />
 
-            {/* ============================================================ */}
-            {/* SEARCH CARD                                                    */}
-            {/* ============================================================ */}
+            {/* SEARCH CARD */}
 
             <GlassCard
               className="right-[27%] top-[52%]"
@@ -446,12 +535,7 @@ export default function Hero() {
               subtitle="SEO & Digital Growth"
             />
 
-            
-            {/* /Web Dav Card  */}
-
-            {/* ============================================================ */}
-            {/* WEBVANTA CARD                                                   */}
-            {/* ============================================================ */}
+            {/* WEB DEVELOPMENT CARD */}
 
             <motion.div
               initial={{ opacity: 0, y: 15 }}
@@ -468,23 +552,17 @@ export default function Hero() {
                 }}
                 className="flex items-center gap-3 rounded-2xl border border-white/90 bg-white/80 px-4 py-3 shadow-[0_20px_45px_-18px_rgba(2,23,89,0.4)] backdrop-blur-xl"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white shadow-sm">
-                  <Image
-                    src={logo}
-                    alt="WebVanta Technologies"
-                    width={30}
-                    height={30}
-                    className="h-7 w-7 object-contain"
-                  />
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#017EF3] text-white shadow-sm">
+                  <WebIcon className="h-5 w-5" />
                 </div>
 
                 <div>
                   <p className="text-[11px] font-extrabold text-[#021759]">
-                    WebVanta
+                    Web Development
                   </p>
 
                   <p className="text-[10px] text-slate-500">
-                    Technology × Growth
+                    Fast & Scalable Websites
                   </p>
                 </div>
               </motion.div>
@@ -492,64 +570,19 @@ export default function Hero() {
           </div>
 
           {/* ================================================================ */}
-          {/* MOBILE IMAGE                                                      */}
+          {/* MOBILE                                                          */}
+          {/* SAME BACKGROUND IMAGE — NO RIGHT CARDS                          */}
           {/* ================================================================ */}
 
-          <div className="relative mt-12 h-[320px] w-full lg:hidden">
-            <Image
-              src={HeroImage}
-              alt=""
-              fill
-              sizes="100vw"
-              className="object-cover object-right"
-            />
+          <div className="relative mt-8 h-[180px] w-full sm:mt-10 sm:h-[230px] lg:hidden">
+            {/* Same HeroImage remains visible */}
 
-            {/* Mobile overlay */}
-
-            <div className="absolute inset-0 bg-gradient-to-b from-white/25 via-transparent to-white" />
-
-            {/* Mobile AI card */}
-
-            <div className="absolute right-2 top-8 z-20">
-              <div className="flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/80 px-3 py-2.5 shadow-xl backdrop-blur-xl">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#017EF3] text-white">
-                  <AIIcon className="h-4 w-4" />
-                </div>
-
-                <div>
-                  <p className="text-[10px] font-extrabold text-[#021759]">
-                    AI-Powered
-                  </p>
-
-                  <p className="text-[9px] text-slate-500">Digital Solutions</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile Search card */}
-
-            <div className="absolute bottom-8 left-2 z-20">
-              <div className="flex items-center gap-2.5 rounded-2xl border border-white/90 bg-white/80 px-3 py-2.5 shadow-xl backdrop-blur-xl">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#EAF5FF] text-[#017EF3]">
-                  <SearchIcon className="h-4 w-4" />
-                </div>
-
-                <div>
-                  <p className="text-[10px] font-extrabold text-[#021759]">
-                    Search Ready
-                  </p>
-
-                  <p className="text-[9px] text-slate-500">
-                    SEO & Digital Growth
-                  </p>
-                </div>
-              </div>
-            </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/95" />
           </div>
         </div>
 
         {/* ================================================================== */}
-        {/* BOTTOM VALUE STRIP                                                  */}
+        {/* BOTTOM VALUE STRIP                                                 */}
         {/* ================================================================== */}
 
         <motion.div
@@ -559,6 +592,7 @@ export default function Hero() {
           className="relative z-40 border-t border-[#021759]/10 py-7"
         >
           <div className="grid gap-6 md:grid-cols-3 md:gap-10">
+
             {/* ITEM 01 */}
 
             <div className="flex gap-3">
@@ -615,6 +649,7 @@ export default function Hero() {
                 </p>
               </div>
             </div>
+
           </div>
         </motion.div>
       </div>
