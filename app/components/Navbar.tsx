@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
   type ComponentType,
-  type KeyboardEvent,
+  type KeyboardEvent as ReactKeyboardEvent,
 } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Manrope } from "next/font/google";
@@ -1064,7 +1064,7 @@ function DropdownTrigger({
   active: boolean;
   open: boolean;
   onClick: () => void;
-  onKeyDown: (event: KeyboardEvent<HTMLButtonElement>) => void;
+  onKeyDown: (event: ReactKeyboardEvent<HTMLButtonElement>) => void;
 }) {
   return (
     <button
