@@ -141,13 +141,7 @@ export default function Services() {
           >
             {/* Eyebrow */}
 
-            <div className="mb-5 flex items-center gap-3">
-              <span className="h-px w-10 bg-[#017EF3]" />
-
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#017EF3]">
-                What We Do
-              </span>
-            </div>
+            
 
             {/* SEO H2 */}
 

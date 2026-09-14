@@ -585,73 +585,7 @@ export default function Hero() {
         {/* BOTTOM VALUE STRIP                                                 */}
         {/* ================================================================== */}
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55 }}
-          className="relative z-40 border-t border-[#021759]/10 py-7"
-        >
-          <div className="grid gap-6 md:grid-cols-3 md:gap-10">
-
-            {/* ITEM 01 */}
-
-            <div className="flex gap-3">
-              <span className="text-[10px] font-extrabold tracking-[0.15em] text-[#017EF3]">
-                01
-              </span>
-
-              <div>
-                <h2 className="text-[13px] font-extrabold text-[#021759]">
-                  Get Discovered
-                </h2>
-
-                <p className="mt-1 text-[11px] leading-[1.6] text-slate-500">
-                  Search-focused digital experiences built for users and modern
-                  discovery.
-                </p>
-              </div>
-            </div>
-
-            {/* ITEM 02 */}
-
-            <div className="flex gap-3">
-              <span className="text-[10px] font-extrabold tracking-[0.15em] text-[#017EF3]">
-                02
-              </span>
-
-              <div>
-                <h2 className="text-[13px] font-extrabold text-[#021759]">
-                  Work Smarter
-                </h2>
-
-                <p className="mt-1 text-[11px] leading-[1.6] text-slate-500">
-                  AI and automation solutions designed to simplify repetitive
-                  business processes.
-                </p>
-              </div>
-            </div>
-
-            {/* ITEM 03 */}
-
-            <div className="flex gap-3">
-              <span className="text-[10px] font-extrabold tracking-[0.15em] text-[#017EF3]">
-                03
-              </span>
-
-              <div>
-                <h2 className="text-[13px] font-extrabold text-[#021759]">
-                  Grow Better
-                </h2>
-
-                <p className="mt-1 text-[11px] leading-[1.6] text-slate-500">
-                  Technology, SEO and digital marketing aligned around
-                  meaningful business outcomes.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </motion.div>
+       
       </div>
     </section>
   );

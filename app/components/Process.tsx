@@ -153,6 +153,7 @@ function RocketGlyph({
 
         <filter id={glowId} x="-80%" y="-80%" width="260%" height="260%">
           <feGaussianBlur stdDeviation="2.4" result="blur" />
+
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
@@ -430,9 +431,11 @@ function JourneyVisual({
       </defs>
 
       {/* Geometry reference */}
+
       <path ref={geometryRef} d={pathD} fill="none" stroke="none" />
 
       {/* Background trajectory */}
+
       <path
         d={pathD}
         fill="none"
@@ -443,6 +446,7 @@ function JourneyVisual({
       />
 
       {/* Active trajectory */}
+
       <motion.path
         d={pathD}
         fill="none"
@@ -457,6 +461,7 @@ function JourneyVisual({
       />
 
       {/* Rocket trail particles */}
+
       {!reducedMotion &&
         [
           {
@@ -491,6 +496,7 @@ function JourneyVisual({
         ))}
 
       {/* Checkpoints */}
+
       {checkpoints.map((point, index) => {
         const status: StepStatus =
           index === activeIndex
@@ -546,6 +552,7 @@ function JourneyVisual({
       })}
 
       {/* Final growth glow */}
+
       {endPoint && activeIndex === 4 && !reducedMotion && (
         <motion.circle
           cx={endPoint.x}
@@ -568,7 +575,8 @@ function JourneyVisual({
         />
       )}
 
-      {/* Rocket */}
+      {/* Main Rocket */}
+
       <motion.g
         style={{
           x: rocketX,
@@ -630,6 +638,7 @@ function ProcessCard({
       aria-current={status === "active" ? "step" : undefined}
       className={[
         "relative flex h-full flex-col gap-4 rounded-2xl border p-6 backdrop-blur-sm transition-colors duration-300",
+
         status === "active"
           ? "border-[#02B5F6]/60 bg-white shadow-[0_18px_45px_-15px_rgba(2,74,191,0.35)]"
           : status === "completed"
@@ -650,6 +659,7 @@ function ProcessCard({
         <span
           className={[
             "flex h-10 w-10 items-center justify-center rounded-full border transition-all duration-300",
+
             status === "active"
               ? "border-transparent bg-gradient-to-br from-[#017EF3] to-[#02B5F6] text-white shadow-[0_0_18px_rgba(2,181,246,0.55)]"
               : status === "completed"
@@ -821,27 +831,8 @@ export default function Process() {
         {/* HEADER                                                             */}
         {/* ================================================================== */}
 
-        <div ref={headerRef} className="mx-auto max-w-2xl text-center">
-          <motion.p
-            initial={{
-              opacity: 0,
-              y: 12,
-            }}
-            animate={
-              headerInView
-                ? {
-                    opacity: 1,
-                    y: 0,
-                  }
-                : {}
-            }
-            transition={{
-              duration: 0.5,
-            }}
-            className="text-sm font-medium tracking-wide text-[#017EF3]"
-          >
-            Our Process
-          </motion.p>
+        <div ref={headerRef} className="mx-auto w-full max-w-6xl text-center">
+          {/* Heading */}
 
           <motion.h2
             id="process-heading"
@@ -861,10 +852,15 @@ export default function Process() {
               duration: 0.6,
               delay: 0.08,
             }}
-            className="mt-3 text-3xl font-semibold text-[#021759] sm:text-4xl"
+            className="mx-auto w-full max-w-6xl text-4xl font-extrabold leading-[1.05] tracking-tight text-[#021759] sm:text-5xl lg:text-7xl"
           >
-            From Idea to Digital Growth
+            From Idea to{" "}
+            <span className="bg-gradient-to-r from-[#017EF3] to-[#02B5F6] bg-clip-text text-transparent">
+              Digital Growth
+            </span>
           </motion.h2>
+
+          {/* Subheading */}
 
           <motion.p
             initial={{
@@ -883,7 +879,7 @@ export default function Process() {
               duration: 0.6,
               delay: 0.16,
             }}
-            className="mt-4 text-base leading-relaxed text-[#021759]/65"
+            className="mx-auto mt-7 w-full max-w-4xl text-base leading-8 text-slate-600 sm:text-lg lg:text-xl"
           >
             We follow a clear, collaborative process to transform your business
             goals into effective digital solutions.

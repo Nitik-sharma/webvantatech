@@ -1,17 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import WhyImage from "../../public/images/whywebvata.png"
+import WhyImage from "../../public/images/whywebvata.png";
+import whyImage2 from "../../public/images/whywebvanta2.png";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Bot,
   CheckCircle2,
   Code2,
   LineChart,
   Rocket,
   Search,
-  Sparkles,
   Workflow,
 } from "lucide-react";
 
@@ -87,22 +86,11 @@ export default function WhyWebVanta() {
         {/* TOP INTRO                                                          */}
         {/* ================================================================= */}
 
-        <div className="mx-auto mb-16 max-w-3xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-5 flex items-center justify-center gap-3"
-          >
-            <span className="h-px w-10 bg-[#017EF3]" />
-
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#017EF3]">
-              Why WebVanta
-            </span>
-
-            <span className="h-px w-10 bg-[#017EF3]" />
-          </motion.div>
+        <div className="mx-auto mb-16 w-full max-w-6xl text-center">
+         
+          {/* ============================================================= */}
+          {/* FULL WIDTH HEADING                                             */}
+          {/* ============================================================= */}
 
           <motion.h2
             id="why-webvanta-heading"
@@ -110,7 +98,7 @@ export default function WhyWebVanta() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.05 }}
-            className="text-4xl font-extrabold leading-[1.1] tracking-tight text-[#021759] sm:text-5xl lg:text-6xl"
+            className="mx-auto w-full max-w-6xl text-4xl font-extrabold leading-[1.05] tracking-tight text-[#021759] sm:text-5xl lg:text-7xl"
           >
             Technology That Works
             <span className="block">
@@ -121,12 +109,16 @@ export default function WhyWebVanta() {
             </span>
           </motion.h2>
 
+          {/* ============================================================= */}
+          {/* FULL WIDTH SUBHEADING                                          */}
+          {/* ============================================================= */}
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.12 }}
-            className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg"
+            className="mx-auto mt-7 w-full max-w-4xl text-base leading-8 text-slate-600 sm:text-lg lg:text-xl"
           >
             WebVanta Technologies helps businesses build, optimize and grow
             their digital presence through web development, custom web
@@ -141,7 +133,7 @@ export default function WhyWebVanta() {
 
         <div className="grid items-center gap-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
           {/* ================================================================= */}
-          {/* LEFT IMAGE                                                         */}
+          {/* LEFT IMAGE                                                        */}
           {/* ================================================================= */}
 
           <motion.div
@@ -152,29 +144,64 @@ export default function WhyWebVanta() {
             className="relative"
           >
             <div className="relative overflow-hidden rounded-[2rem] border border-[#021759]/10 bg-white p-3 shadow-2xl shadow-[#021759]/10">
-              {/* Main Image */}
+              {/* Main Images */}
 
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[1.5rem]">
-                <Image
-                  src={WhyImage}
-                  alt="WebVanta Technologies digital solutions including web development, SEO, AI, automation and business growth"
-                  fill
-                  priority={false}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-700 hover:scale-105"
-                />
+              <div className="flex flex-col gap-4">
+                {/* Image 1 - Large */}
 
-                {/* Image Overlay */}
+                <div className="relative h-[420px] w-full overflow-hidden rounded-[1.5rem]">
+                  <Image
+                    src={WhyImage}
+                    alt="WebVanta Technologies digital solutions including web development, SEO, AI, automation and business growth"
+                    fill
+                    priority={false}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
 
-                <div className="absolute inset-0 bg-gradient-to-t from-[#021759]/75 via-[#021759]/10 to-transparent" />
+                  {/* Image 1 Overlay */}
 
-                {/* Floating AI Badge */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#021759]/70 via-[#021759]/10 to-transparent" />
 
-            
+                  {/* Floating label */}
 
-                {/* Bottom Content */}
+                  <div className="absolute bottom-5 left-5 rounded-2xl border border-white/30 bg-white/15 px-4 py-3 shadow-xl backdrop-blur-xl">
+                    <p className="text-xs font-bold uppercase tracking-wider text-white">
+                      Digital Growth
+                    </p>
 
-              
+                    <p className="mt-1 text-[11px] text-white/80">
+                      Technology • Strategy • Innovation
+                    </p>
+                  </div>
+                </div>
+
+                {/* Image 2 */}
+
+                <div className="relative h-[260px] w-full overflow-hidden rounded-[1.5rem]">
+                  <Image
+                    src={whyImage2}
+                    alt="AI, automation, analytics and scalable technology solutions by WebVanta Technologies"
+                    fill
+                    priority={false}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
+                  />
+
+                  {/* Image 2 Overlay */}
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#021759]/65 via-transparent to-transparent" />
+
+                  {/* Floating label */}
+
+                  <div className="absolute bottom-5 left-5">
+                    <div className="rounded-xl border border-white/20 bg-[#021759]/60 px-4 py-2.5 backdrop-blur-xl">
+                      <p className="text-xs font-bold text-white">
+                        AI & Automation
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -266,8 +293,6 @@ export default function WhyWebVanta() {
 
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-3">
-                          
-
                           <h4 className="text-base font-extrabold text-[#021759] sm:text-lg">
                             {feature.title}
                           </h4>
@@ -329,7 +354,7 @@ export default function WhyWebVanta() {
         </div>
 
         {/* ================================================================= */}
-        {/* BOTTOM TRUST STRIP                                                  */}
+        {/* BOTTOM TRUST STRIP                                                */}
         {/* ================================================================= */}
 
         <motion.div
